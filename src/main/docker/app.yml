@@ -1,0 +1,19 @@
+version: '2'
+services:
+    jhipsterwebsocketapplication-app:
+        image: jhipsterwebsocketapplication
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mysql://jhipsterwebsocketapplication-mysql:3306/jhipsterwebsocketapplication?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=jhipsterwebsocketapplication-elasticsearch:9300
+        ports:
+            - 9003:9003
+    jhipsterwebsocketapplication-mysql:
+        extends:
+            file: mysql.yml
+            service: jhipsterwebsocketapplication-mysql
+    jhipsterwebsocketapplication-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: jhipsterwebsocketapplication-elasticsearch
